@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Friend</title>
+    <style>
+        body{
+            background: linear-gradient(-70deg, #2B3656,  #563444);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .block{
+            width: 400px;
+            height: 450px;
+        }
+        form{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form_inner{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bools{
+            display: flex;
+            flex-direction: row;
+            margin: 3px 0px;
+            padding: 10px;
+            background: linear-gradient(46deg, #2D2A3B, #22273B);
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bolder;
+            color: #9c9c9c96;
+        }
+        .input_text{
+            padding: 10px;
+            border-radius: 10px;
+            background: linear-gradient(46deg, #2D2A3B, #22273B);
+            margin-bottom: 3px;
+            font-size: 16px;
+            font-weight: bolder;
+            color: darkgrey;
+        }
+        .input_bool{
+            margin-left: 25px;
+            transform: scale(1.2);
+        }
+        .check{
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 10px;
+            border-color: transparent;
+            background: linear-gradient(46deg, #5F98DB, #66A8DF);
+            color: #dbd1d1;
+            font-weight: 700;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .title{
+            position: absolute;
+            top: -90px;
+            width: 100%;
+            text-align: center;
+            color: #FBF7FF;
+            font-family: serif;
+            font-size: 38px;
+        }
+        .m_block{
+            padding: 20px;
+            background: linear-gradient(46deg, #2D2A3B, #22273B);
+        }
+        .message{
+            color: #FBF7FF;
+            text-align: center;
+            font-size: 80px;
+        }
+        .btn{
+            display: block;
+            text-align: center;
+            color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <div class="block">
+        {% if 'message' in request.args %}
+        <div class="m_block">
+            <h1 class="message">{{request.args['message']}}</h1>
+            <a href="/" class="btn">Back</a>
+        </div>
+        {% elif form %}
+        <form action="" method="post">
+            <div class="form_inner">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
+                {{form.username(class="input_text")}}
+                {{form.fullname(class="input_text")}}
+                {{form.description(class="input_text")}}
+                <div class="bools">
+                    {{form.private.label()}}
+                    {{form.private(class="input_bool")}}
+                </div>
+                <div class="bools">
+                    {{form.profilepic.label()}}
+                    {{form.profilepic(class="input_bool")}}
+                </div>
+                <div class="bools">
+                    {{form.externalurl.label()}}
+                    {{form.externalurl(class="input_bool")}}
+                </div>
+                {{form.followers(class="input_text")}}
+                {{form.follows(class="input_text")}}
+                {{form.posts(class="input_text")}}
+                {{form.check(class="check")}}
+            </div>
+            <h1 class="title">
+                Fake Friend
+             </h1>
+        </form>
+        {%endif %}
+    </div>
+</body>
+</html>
